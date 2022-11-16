@@ -1,0 +1,510 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Pdg2Pic</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META name=GENERATOR content="MSHTML 8.00.7601.17514"></HEAD>
+<BODY>
+<DIV align=center>
+<CENTER>
+<TABLE border=0 cellSpacing=0 cellPadding=0 width=700>
+  <TBODY>
+  <TR>
+    <TD>Pdg2Pic: A freeware to convert PDG file into image (TIFF, JPG, PNG) 
+      file<span lang="en-us"> or PDF file</span>. 
+      <P>作者：马健<BR>邮箱：<A 
+      href="mailto:stronghorse_mj@hotmail.com">stronghorse_mj@hotmail.com<BR></A>主页：<A 
+      href="http://www.cnblogs.com/stronghorse/" target=_blank>老马的原创空间</A></P>
+      <P><A href="#FAQ">FAQ<BR></A><A 
+      href="#使用说明">使用说明<BR></A>&nbsp;&nbsp;&nbsp; <A 
+      href="#软件安装/删除">一、软件安装/删除<BR></A>&nbsp;&nbsp;&nbsp; <A 
+      href="#软件使用">二、软件使用</A><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <A 
+      href="#图像类PDG文件">图像类PDG文件</A><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      <A href="#文本类PDG">文本类PDG</A><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      <A href="#JPG文件修复">JPG文件修复</A><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      <a href="#PDF分段页码">PDF分段页码</a><A href="#软件使用"><BR></A><A href="#鸣谢">附录A 
+      鸣谢<BR></A><A href="#版本更新记录">附录B 版本更新记录</A></P>
+      <H1><A name=FAQ><FONT color=#ff0000>FAQ</FONT></A></H1>
+      <P>Q：Pdg2Pic是什么？<BR>A：这是一个将PDG文件转成图像文件（包括TIFF、JPG、PNG、GIF、BMP、WEBP等）或PDF的免费软件，具有下列特色： 
+      <OL>
+        <LI>软件独立运行，不需要SSREADER或其他软件、控件的支持。<LI>
+		支持V1版PDG，及V2版0xH、1xH、28H、AxH，不支持FFH、6xH；支持名为PDG，实为JPG、JPEG 
+		2000、PNG、BMP、GIF、WEBP、TIFF、DjVu、PDF的文件，但文件名必须符合PDG命名规范。<LI>
+		对图像版PDG，可以转换成图像，也可以直接转换成PDF，包括OCR成双层PDF，并提供对自身所生成的双层PDF进行校对所需的辅助功能。<LI>
+		对文字版PDG，可以转换成散页PDF，并与图像版附属页统一编号，便于合并。<LI>
+		转换成PDF时，支持分段页码、多级目录（书签），能够将目录、BookInfo.dat作为文本添加到PDF文件中，并用BookInfo.dat中的内容填写PDF的Document 
+		Properties，包括Title、Author、Subject、Keyword。<LI>除彩色版DjVu文件（通常是快速版PDG）外，所有转换均为无损转换。<LI>如果转换过程中出现错误，将给出错误日志，便于定位有问题的PDG文件。 
+        <LI>超星JPG版PDG经常有错，超星浏览器在打开这些数据错误的PDG文件时可能会中断退出，因此提供“JPG文件修复”功能，对文件进行修复。 
+        <LI>可以单独对PDF文件设置分段页码，方便<span lang="zh-cn">按照</span>目录页中的页码直接跳转。</OL>
+      <P>为避免因为某些原因造成转换不完全，建议在使用本软件前，先用PdgThumbViewer对需要转换的PDG文件进行格式检查。 
+      <P>用户在使用本软件前务必先认清以下事实： 
+      <UL>
+        <LI>本文讨论PDG转图像、PDF的方法，仅出于研究目的，无意对PDG版权进行任何形式的侵犯，也不希望任何人用本文讨论的工具或方法从事侵权活动。如果需要获取PDG文件，请通过购买点卡等方式，以合法的途径获得。 
+
+        <LI>本文假定用户通过合法的手段获得PDG文件，只是由于希望能够在比超星浏览器更好、更方便的浏览器上阅读，并且不对转换出来的文件进行扩散的情况下，才需要将PDG文件转换成图像
+		或PDF文件。 
+
+        <LI>请勿将本软件用于非法目的。使用本软件造成的一切后果（包括法律后果）由使用者自行承担。 </LI></UL>
+      <P>Q：现在已经有pdg2bmp&amp;jpg&amp;tif&amp;pdf&amp;txt、BooX 
+      Viewer等软件，为什么还要开发Pdg2Pic？<BR>A：主要是为了证实我的一些想法的可行性，详见我写的<A 
+      href="http://www.cnblogs.com/stronghorse/" 
+      target=_blank>《PDG转图像、PDF的若干方法》</A>。 
+      <P>Q：与其它PDG转换软件相比，Pdg2Pic有什么不足？<BR>
+		A：我没有时间去研究超星五花八门的加密算法，所以Pdg2Pic对加密PDG文件的支持有限。对于Pdg2Pic不支持的加密格式，请先用coolman的MJPD（深海宝贝）解密，再用Pdg2Pic转。 
+      <P>Q：Pdg2Pic收费吗？<BR>A：Pdg2Pic是一个“友情软件”（Friendware），用户在承诺不用于商业目的，也不对文件及其附件进行任何更改的条件下，不需要为使用该软件付任何费用，最多是在BBS上看到我发帖子灌水时（我的ID一般是strnghrs），进去捧个人场，作为友情回报；或者在年节时<A 
+      href="mailto:stronghorse_mj@hotmail.com">发个email</A>问声好（所以叫“友情软件”）。我承诺绝不在程序中暗藏任何商业广告、木马，但不承诺为使用Pdg2Pic的后果承担任何责任。如果您需要将它用于商业目的，或加入您的网站，请<A 
+      href="mailto:stronghorse_mj@hotmail.com">与我联系</A>，否则保留追究一切责任的权利。</P>
+      <P>Q：Pdg2Pic将PDG转换成图像文件，会造成图像质量下降吗？<BR>A：对于真正的PDG文件来说，除了原始格式为T2 
+      DjVu的PDG文件外，逻辑上说所有PDG文件均可无损转换成图像文件。T2 DjVu即为传说中的“快速版”，收藏的价值不大，现在也比较少见了。<br>
+		对于T3类型的多层PDG，见下一个问题的回答。<br>
+		对于其他文件格式直接更名为PDG的情况，包括JPG、BMP、GIF、PNG、TIFF、JPEG 
+		2000、WEBP、DjVu等情况，只有DjVu会被按照参数设置转换成指定的格式，其他格式一律恢复成原有文件扩展名，不进行任何数据转换。</P>
+      <P>Q：为什么有时候转换完成后，在目标文件夹下会多出一些以000、001、002为扩展名的文件？<BR>A：如果选择了“生成FreePic2Pdf接口文件”选项（缺省为选择），在碰到T3多层PDG文件时，除了生成正常的图像外，还会将每一层图像提取出来生成一个文件，扩展名按层顺序命名为000、001、002等，这些层信息会记录在FreePic2Pdf.itf文件中，以后用<A 
+      href="http://www.cnblogs.com/stronghorse/" 
+      target=_blank>FreePic2Pdf</A>将图像转换成PDF文件时，它会自动按照层顺序将图像合并到PDF页面。<BR>正常情况下，多层PDG文件的底层为文字层，其它层为JPG格式的图像层。如果将所有层合并成一个JPG文件，必然会因为重新压缩而造成图像质量下降、文件膨胀等问题。将每一层无损保存下来，在PDF中合并成多层页面，可以保证质量和文件大小都与原PDG文件相当。 
+      这是Pdg2Pic与其他PDG转PDF转换方法，尤其是打印法的重要区别。<br>
+		除了这些层文件外，每一页T3类型的PDG还会把各层文件全部合并，按照“彩色/灰度图像存为”的选项指定的格式，存为单一图像文件。在用FreePic2Pdf转PDF时，其实这个合并后的文件会被自动忽略，因为如前所述，用各层拼接才是真正无损。</P>
+      <P>Q：如何将PDG转成PDF？<BR>A：有两种选择：<ol>
+		<li>用Pdg2Pic将PDG转换成图像文件后，用<A 
+      href="http://www.cnblogs.com/stronghorse/" 
+      target=_blank>FreePic2Pdf</A>或其它图像转PDF软件转成PDF。对图像转PDF软件的讨论、比较见我写的《<A 
+      href="http://www.cnblogs.com/stronghorse/" 
+      target=_blank>图像转PDF的问题、方法及题外话</A>》一文。<BR>如果使用<A 
+      href="http://www.cnblogs.com/stronghorse/" 
+      target=_blank>FreePic2Pdf</A>转换，建议勾选“生成FreePic2Pdf接口文件”选项
+		，否则不仅对于多层PDG将丧失层次信息，而且PDG独有的分段页码、书签、bookinfo等也将失去。<BR>
+		<A 
+      href="http://www.cnblogs.com/stronghorse/" 
+      target=_blank>FreePic2Pdf</A>参数设置对生成的PDF文件影像比较大，有时候需要反复设置才能获得满意的结果。这也是为什么 
+      我以前没有让Pdg2Pic具有直接生成PDF功能的原因：图像转PDF速度比较快，反复试几次没什么关系，PDG转图像太慢，反复试是不可能的。</li>
+		<li>用Pdg2Pic直接转。与第一种方法相比，这种方法的核心就是“简化”，所以隐藏了一些不常用的参数。如果希望对生成的PDF进行精细控制，建议采用第一种方法。另外这种方法还有一个重要特征：对于采用DjVu压缩的页面
+		（快速版PDG），黑白的会无损转换成JBig2数据流，灰度/彩色的会转换成长度近似等长的JPEG 
+      2000数据流，因此转换出来的PDF会比方法1的小，但是不支持JBig2、JPEG 2000的PDF浏览器不能正常阅读这样的PDF。 </li>
+		</ol>
+		<P>总之，如果打算对图像进行处理，或进行精细控制，建议采用两次转换法，否则还是用Pdg2Pic一次到位算了。</p>
+      <P>Q：FreePic2Pdf接口文件有什么作用？<BR>A：接口文件是一个INI格式的纯文本文件，起到以下作用：<BR>1、说明PDG页的统一宽度，转换出来的PDF都按这个宽度设置页宽，保证所有页面的宽度一致。手工修改这个值，可以改变最终PDF的页宽。<BR>2、说明多层（T3）PDG各层的关系，便于FreePic2Pdf组装成多层PDF。<BR>3、说明PDG书签结构，便于FreePic2Pdf生成PDF书签。<BR>3、说明目录页、正文页的起始页号，便于FreePic2Pdf在PDF文件中自动生成三段页码：封面、版权页用大写英文字母，目录页用小写罗马字母，正文页用阿拉伯数字。<BR>4、说明是否需要在PDF文件中生成多级书签。<BR>5、说明FreePic2Pdf是否需要将BookInfo.dat添加到PDF文件中。这个文件是一个文本文件，添加后便于用Acrobat的搜索功能搜索。FreePic2Pdf还可以用其中内容填写PDF的Document 
+      Properties，包括Title、Author、Subject、Keyword。<BR>对接口文件的说明见FreePic2Pdf使用说明书。 
+      <P>Q：Pdg2Pic如何生成，或者说依据什么生成FreePic2Pdf接口文件？<BR>A：按照下列规范：<BR>1、如果转换的PDG文件包含多层（T3）PDG，则在[Images]中说明，否则该段为空。<BR>2、如果转换的文件夹下包含BookInfo.dat或bookcontents.dat，则生成[Font]段，否则不生成。[Font]段中FontSize、Margin按照[Main]段的MinWidth计算，其他为固定值。<BR>3、如果转换的文件夹下包含BookInfo.dat，则生成[TextPage]段，否则不生成。<BR>4、如果转换的文件夹下包含bookcontents.dat，则生成[Bkmk]段，否则不生成。<BR>5、从BookInfo.dat中抽取“书名”、“作者”、“参考文件格式”、“主题词”，填写[Info]段中的Title、Author、Subject、Keywords。<BR>6、[Main]段中，用页面的最大宽度填写MinWidth（单位为像素），ContentsPage、TextPage按照实际页码生成。 
+
+      <P>Q：有些PDG文件转换不出来，Pdg2Pic报告这些文件是HTML文件，怎么办？<BR>A：这种PDG文件通常可以直接用超星浏览器打开，打开后在一个基于IE内核的窗口内显示图像、文字。由于某些技术上的限制，超星浏览器会在系统temp文件夹下存放解出来的图像文件，直接找到并复制出来即可得到图像文件。如果觉得自己找比较麻烦，也可以到<A 
+      href="http://www.cnblogs.com/stronghorse/" 
+      target=_blank>我的网站</A>下载一个CtrlN软件，通过它来找。 
+      <P>Q：为什么要支持名为PDG，实为PNG的文件？<BR>A：我个人认为，PDG文件的功绩之一是定义了一个文件命名规范，可以区别封面、目录、正文等页面。但是PDG文件只支持黑白、彩色、256级灰度图像，而不支持16级灰度、4级灰度等的图像。如果扫描时使用的扫描仪高级到能够智能区别彩色和黑白页面，PDG这样做并没有什么问题；但是如果扫描仪没这么高级，烦恼就来了：为了给某本书补页，我曾经托人帮我扫描过几页，由于扫描者、扫描仪、书等的综合原因，导致这几页彩色不彩色、黑白不黑白，直接存储为JPG未免太过浪费；减色为黑白图像则损失太大，字都缺胳膊少腿；最佳选择是减色成16级灰度，然后存储成PNG，但是偏偏这样的文件不符合PDG规范，从那个时候起我就下定决心要在未来的PDG浏览器中加入对PNG的支持。 
+
+      <P>Q：为什么要支持名为PDG，实为DjVu的文件？<BR>A：有时候PDG文件缺页，刚好可以从中美百万补，格式之间转来转去的也没啥意思，还可能造成质量损失，不如直接支持算了。 
+
+      <P>Q：为什么要支持名为PDG，实为单页TIFF的文件？<BR>A：现在自己扫书的人越来越多，扫描后的图片一般黑白的存储为CCITT 
+      G4压缩的TIFF文件，彩色/灰度存储为JPG文件。当然也有好事者将彩色/灰度存储为JEPG压缩的TIFF，但是这种格式的兼容性实在太差，一般不主张。<BR>这种自扫图像最麻烦的是没有一个合适的浏览器进行浏览，或转换成PDF等格式；文件命名也缺乏规范，都是随心所欲。与此相比，PDG的命名要更严谨，UnicornViewer、Pdg2Pic/FreePic2PDF等第三方工具也比较成熟，完全可以加以利用。<BR>从格式上说，JPG文件只要改成符合PDG文件命名规范的名字即可，但TIFF文件即使改名，也不能被常规PDG浏览器浏览，但是我又讨厌在不同格式之间转来转去，所以就直接支持名为PDG，实为TIFF的文件。这样自己扫书后，用PdgRenamer改成符合PDG规范的文件名，即可直接浏览。 
+
+      <P>Q：双层PDF是什么，有什么用？<br>
+		A：双层PDF的“双层”，指的是“图像层+隐藏文字层”，即在扫描图像上，再蒙一层不可见的隐藏文字，这样在阅读的时候，看到的是与原书完全一样的扫描图像，但是同时又可以对隐藏文字进行搜索、复制。<br>
+		双层PDF的文字靠OCR生成，本软件所用的OCR引擎是微软Office 2003/2007自带的MODI（Microsoft Office 
+		Document Imaging）。MODI的安装及多语言支持见我网站上的相关文章。<br>
+		OCR结果不能保证100%准确性，其结果与图像分辨率、图像质量密切相关。图像分辨率越高、越是黑白分明，OCR结果就越好。如果图像分辨率低于300 
+		DPI，建议就别OCR了，以免结果太过搞笑。<H2><A name=使用说明><FONT color=#ff0000>使用说明</FONT></A></H2>
+      <P><A name=软件安装/删除><FONT color=#ff0000>一、软件安装/删除</FONT></A></P>
+      <P>本软件安装非常简单：创建一个目录，用WinZip、WinRAR将下载下来的ZIP包解压缩到该目录即可。</P>
+      <P>本软件的删除也很简单：直接删除从ZIP包中解压缩出来的所有文件及运行过程中生成的文件即可。</P>
+      <P>ZIP包中包括下列文件： 
+      <OL>
+        <LI>Pdg2Pic.exe。这是软件的主程序。 
+        <LI>Pdg2Pic.htm。本帮助文件。 </LI></OL>
+      <P>如果您下载到的ZIP包中还包括其它文件，毫无疑问不是我放进去的，有广告或木马之嫌疑，请立即删除。</P>
+      <P>另外程序运行过程中还会生成以下文件： 
+      <OL>
+        <LI>Pdg2Pic.ini。这个是参数保存文件，第一次更改参数后生成。退出Pdg2Pic，删除此文件，再重启Pdg2Pic，即可恢复缺省参数。 
+
+        <LI>Pdg2Pic_log.txt。这个是错误记录文件，在转换过程中出现错误时自动生成，没有错误则自动删除以前的错误记录。 </LI></OL>
+      <p>
+		而如果要生成双层PDF，还需要MODI_Engine和MODI组件的配合。MODI_Engine的压缩包，及MODI的独立安装包都可以到我的网盘下载，网盘地址在这里的置顶贴中公布：<br>
+		<a href="http://www.cnblogs.com/stronghorse/">
+		http://www.cnblogs.com/stronghorse/</a></p>
+	<p>安装MODI的步骤：</p>
+	<ol>
+		<li>
+		从我的网盘“原创软件”文件夹中下载MODI_Engine.zip，解压出MODI_Engine.exe，把它放到Pdg2Pic.exe所在文件夹，即这两个软件必须在同一个文件夹下才能配合使用。</li>
+		<li>
+		从我的网盘“OCR”文件夹中下载MODI_From_Office2007SP3.rar，解压后严格按照“安装说明.txt”中的说明进行安装。</li>
+		<li>
+		在Win10下如果总是提示OCR结果为空，但把DjVuToy.exe设置为以管理员权限运行后OCR正常，说明你安装的MODI不是从我网盘下载的最新版MODI_From_Office2007SP3.rar。具体参见这里：<a href="https://www.cnblogs.com/stronghorse/p/16324372.html">用MODI一次OCR一整本书并将结果发送到WORD 
+		- strnghrs - 博客园 (cnblogs.com)</a></li>
+	</ol>
+      <P><A name=软件使用><FONT color=#ff0000>二、软件使用</FONT></A></P>
+      <P><B><FONT color=#ff0000><A name=图像类PDG文件>图像类PDG文件</A></FONT></B></P>
+      <P>鼠标双击Pdg2Pic.exe启动软件后，对于通常的图像类PDG文件，按照软件界面上标注的1、2、3、4的顺序执行即可转换：</P>
+      <P>1、选择需要转换的PDG文件所在文件夹。<BR>选择后，文件夹中的所有PDG文件将自动按照封面、前言、目录、正文、附录的顺序排列，并且自动统计、报告PDG文件格式。如果需要对页面顺序进行手工调整，可以用工具条上的按钮改变文件在列表中的位置。如果“预览”选项被选中（缺省为选中），则在列表右侧的预览窗口会显示当前选中的PDG文件，并在列表下方的信息窗口显示出PDG文件简要信息，包括宽度、高度、DPI、类型 
+      、原始数据格式。类型通常显示为T1（黑白图像）、T2（灰度/彩色图像）、T3（多层图像）。原始数据格式包括CCITT_v1（V1版黑白PDG）、CCITT、JPG和DjVu，T3文件报告底层和第一个插图的格式，中间用“＋”连接。<BR>如果发现显示不正常或不能显示的PDG图像，请先在列表中把文件前面的勾号点掉，再进行转换。<BR>如果嫌选择麻烦，或只想转换文件夹中的几个文件，也可以从资源管理器直接拖拽文件夹或文件到界面上。如果拖过来的是文件夹，则将该文件夹下所有PDG文件加入列表；如果拖过来的是文件，则将这些文件加入列表。<BR>如果“预览”选项选项被选中（缺省为选中），则每次选中列表中的文件，均会在预览窗口显示该文件的略缩图。<BR>如果“自动统计”选项选项被选中（缺省为选中），则每次改变文件或文件夹，均统计并报告列表中的文件格式；否则不统计。</P>
+      <P>2、选择存放转换出来的图像文件的文件夹，或转换出来的PDF文件。<BR>如果“参数设置”中选择了“目标文件夹与源文件夹相同”（缺省为选择），则可忽略这一步：每次在第1步中选择PDG文件夹，均会自动设置图像文件夹 
+      、PDF文件。否则需要点击按钮选择。</P>
+	<P>转换成PDF的参数选择：</P>
+	<ul>
+		<li>顺便把书签挂上去：选中则生成的PDF带书签，否则不带。对书签的进一步控制可在“参数选择”中设置。</li>
+		<li>生成双层PDF：选中则调用MODI进行OCR，生成带隐藏文字的、可检索的双层PDF。因为OCR过程较长，而且MODI的安装也不是所有电脑白痴都能轻松搞定的，所以此选项缺省未选中。</li>
+		<li>
+		OCR语言：只有在选中“生成双层PDF”后才有效。OCR语言的选择不仅影响OCR结果的准确度（如明明是繁体字图像，却选择按简体识别），而且影响PDF中的文字编码，因此应尽量准确。</li>
+		<li>
+		合并文本行：只有在选中“生成双层PDF”后才有效，如果选中，则将识别结果按照行（横排）或列（竖排）进行合并，否则不合并。合并后的PDF文件长度相对会小一点，校对也方便，但是有时候合并可能会把跨区域的行合并在一起，单个字符的位置可能也会出现变化。</li>
+	</ul>
+      <P>3、设置转换参数。</P>
+      <UL>
+        <LI>转换结束后删除原始PDG文件：含义同字面含义。 
+        <LI>目标文件夹与源文件夹相同：含义见上面说明。 
+        <LI>重新编号转换出来的图像文件：如果选中，则转换出来的文件将按表格中的顺序重新编号，便于用ComicsViewer等图像浏览软件顺序观看，或用图像转PDF软件进行转换；否则转换出来的图像文件与PDG文件的主文件名相同，扩展名不同。 
+
+        <LI>
+		cov002放最后：理论上说PDG的封底页是bac001.pdg，但是不知道为什么，基本上所有PDG书籍的封底都与封面混在一起，所以经常被命名为cov002.pdg。如果该选项未被选中，则cov002就紧接在cov001后面，否则在满足以下条件时，cov002将被放到尾部，起到封底的作用：<UL>
+        <li>“重新编号转换出来的图像文件”选项被选中。</li>
+		<li>有cov001、cov002，但没有cov003。</li>
+		<li>没有bac001。</li>
+		</UL>
+      
+        <LI>自动检测灰度图像：对于T2图像，可能是灰度，也可能是彩色。将灰度图像识别出来并保存为灰度JPG，将比保存为彩色JPG更省地方。不过由于检测需要消耗时间，所以此选项缺省为未选中。 
+
+        <LI>JPEG质量系数：对于DjVu图像，可以存为JPG文件，或采用JPG压缩算法的TIFF。该参数控制图像质量的文件大小：此值越大，图像质量损失越小，但是文件长度越大。 <span lang="zh-cn">
+		即使质量系数为100%，也不是无损压缩。</span><LI>JP2<span lang="zh-cn">压缩比：即</span>JPEG 2000<span lang="zh-cn">的压缩率，范围</span>1<span lang="zh-cn">～100，可控制生成的JP2文件的大小：<br>
+		最终JP2文件字节数 ≈ 图像像素宽度×图像像素高度×JP2压缩率÷100<br>
+		当然天下没有白吃的午餐，文件越小，质量越差。即使压缩率为100%，也不是无损压缩。</span><LI>黑白图像存为：TIFF、PNG、BMP。TIFF压缩比大，PNG、BMP兼容性好。均为无损压缩。 
+        <LI>彩色/灰度图像存为：JPEG、JPEG TIFF（采用JEPG压缩算法的TIFF）均为有损压缩，PNG为无损压缩，JPEG 
+        2000在JPEG质量系数为100%时为无损压缩，其它值时为有损压缩。 
+        <br>
+		此参数只对两种PDG文件有用：<br>
+		1、DjVu直接更名成PDG，而且是彩色/灰度DjVu。<br>
+		2、T3类型的多层PDG，会把各层合并成一个单一文件并按照此选项存储，见上面FAQ部分。<br>
+		很多人挖空心思来回折腾这几个参数，孜孜不倦地追求所谓“无损”，其实以其半瓶醋晃来晃去，不如直接用缺省值算了。对于外行来说，有一个简单的办法检验转换是否无损：看转换前后的总文件长度是否变化不大，如果不大多半就是无损的，如果变化很大则多半是有损的。<LI>生成FreePic2Pdf接口文件：如果此选项被选中（缺省为选中），在碰到T3多层格式的PDG文件时，除了生成正常的图像外，还会将每一层图像提取出来生成一个文件，扩展名按层顺序命名为000、001、002等，这些层信息会记录在FreePic2Pdf.itf文件中，以后用<A 
+        href="http://www.cnblogs.com/stronghorse/" 
+        target=_blank>FreePic2Pdf</A>将图像转换成PDF文件时，它会自动按照层顺序将图像合并到PDF页面。 
+        另外在选中此选项后，还可以再设置下列子项<BR>1、生成页码：在PDF文件中自动生成三段页码：封面、版权页用大写英文字母，目录页用小写罗马字母，正文页用阿拉伯数字。便于快速定位页面。<BR>2、生成书签：根据bookcontents.dat文件，在PDF中生成多级书签。如果指定的源文件夹下没有bookcontents.dat文件，将自动生成一个缺省的。<BR>3、显示书签。如果选中，生成的PDF打开即显示书签，否则打开后不显示，需要手工选择才能看到书签。<BR>4、添加BookInfo.dat到PDF文件尾：这个文件是一个文本文件，添加后便于用Acrobat的搜索功能搜索。<BR>5、添加书签到PDF文件尾：如果此选项被选中，书签内容作为文本添加到PDF文件尾部，便于搜索。<BR>6、展开书签：生成的接口文件中Bkmk段ShowAll的值。选中则生成的PDF文件中所有多级书签都是展开的，否则只显示顶级书签，下级书签折叠。<BR>7、无书签文件时用页码生成书签。如果选中，则在无书签文件（bookcontents.dat或catalog.dat）时用页码生成书签，每个书签项对应一页；否则在无 
+        书签文件时不生成书签。<LI>PDF书签：点击书签项后，是否需要对页面进行缩放。<LI>
+		PDF文件初始视图：选择PDF文件被打开时，以什么样的方式展现给用户。</UL>
+      <p>如果想通过OCR生成双层PDF，则还需选择下列选项：</p>
+	<ul>
+		<li>
+		生成双层PDF：如果此选项被选中，则转换过程中启动OCR，生成隐藏文字，否则只转换图像，不管文字。由于需要时间，MODI的安装也不是电脑白痴随随便便就能搞定的，因此此选项缺省未选中，以免麻烦。<br>
+		在选中“生成双层PDF”后，下列选项才能生效：</li>
+		<li>
+		OCR语言：一次只能选择一种语言，注意所选项必须与所识别的文字相匹配，例如想识别繁体字，就一定要选择“繁体中文”，否则识别出来的结果多半会很搞笑。</li>
+		<li>
+		合并文本行：如果选中，则转换出来的PDF文件中的隐藏文本以行为单位，文件长度较小，但是字的位置不一定准确。如果未选，则以字（CJK）或词（非CJK）为单位，字的位置比较准确，文件长度略大。</li>
+		<li>CJK版式：中、日、韩文字都有横排和竖排之分，本软件在一定程度上可以自动识别，如果对识别结果不满意，可以手工选择是横排还是竖排。此选项对OCR准确性没有影响，仅对隐藏文字采用的字体有影响。&nbsp;</li>
+		<li>
+		去掉大于页面尺寸1/*的图表：MODI引擎在OCR中日韩语言时相当脆弱，经常因为图表的干扰而造成页面OCR结果为空，甚至整个软件出错退出。我已经尽力捕捉可能的错误，但还是不能根除，因为有时甚至会出现“堆栈溢出”这样匪夷所思的无法恢复错误。即使出现的是可恢复的错误，也多半会产生内存漏洞，所以在OCR前先对图像清理一遍是一个更安全的做法。判断是否是需要清除的图表的标准相当简单粗暴：二值化图像以后找联通域，只要联通域的高度或宽度大于指定的尺寸，就去掉该联通域。这里“指定的尺寸”是页面宽、高的较小值除以指定的比例之后的结果，该结果如果小于40像素则不在该页面执行去除图表操作。如果指定的比例是1，则所有页面都不会执行自动去除图表操作。</li>
+	</ul>
+      <P>4、开始转换<BR>开始将源文件转换成PDF文件。转换过程中点“中止”按钮可以中断转换过程。<BR>转换过程中如果出现错误，在转换结束后会报告并询问是否查看错误记录。点击界面上的“错误日志”，可以查看最近的错误日志。</P>
+      <P>快捷键1、2、3、4，与界面上的1、2、3、4项功能对应。点击窗口右上角的“×”按钮即可退出程序。</P>
+	<P>
+	双层PDF完全基于OCR技术，目前的OCR引擎不可能达到100%的准确率，如果想对生成的双层PDF进行人工校对，可以点击“校对”按钮，进入“PDF校对工具”界面，利用其中提供的显示、隐藏双层PDF中的文本、删除扫描图像等 
+	工具，辅助完成PDF校对过程。通常的校对过程为：</P>
+	<ol>
+		<li>显示PDF中的隐藏文本，可以设置文字显示颜色、底图透明度。</li>
+		<li>文字显示出来后，就可以用Foxit PDF Editor、Foxit 
+		Phantom对文本进行编辑，包括增加、删除、改变位置、改变显示比例等。推荐使用的编辑工具是Foxit Phantom 
+		v2.2.4，更高的版本没有意义，更低的版本则不可靠。</li>
+		<li>编辑完成后，点“隐藏文字”页签，把编辑过的文字再次隐藏起来。</li>
+		<li>
+		如果对校对结果很有信心，也不想再被大量的图像占据存储空间，可以用“删除图像”功能把原始扫描图像干净、彻底地从PDF中删除。注意删除图像是物理删除，即删除掉的图像再也找不回来，因此请慎重使用此功能。 
+		</li>
+	</ol>
+	<P>注意在使用前请仔细阅读界面中显示的注意事项，以免后悔。具体细节详见我写的《校对双层PDF中的隐藏文本》。</P>
+      <P><B><FONT color=#ff0000><A name=文本类PDG>文本类PD</A></FONT></B><FONT 
+      color=#ff0000><B><A name=文本类PDG>G</A></B></FONT></P>
+      <P>对于文本类PDG，点击工具条上的TxT按钮，进入文本PDG处理界面执行转换，按界面上标注的1、2、3步骤操作即可。</P>
+      <P>对其中选项的说明：</P>
+      <UL>
+        <LI>重新编号：如果被选中，则转换出来的PDF文件按页面先后顺序重新编号，便于用Acrobat合并，否则转换出来的PDF与PDG同名。 
+        <LI>图像PDG也一起转：如果被选中，则图像附属页也一起转换成PDF文件，便于合并。合并后可以先用PdfToy统一页面宽度，然后用FreePic2Pdf挂书签、设置分段页码。 
+        </LI>
+		<LI>cov002放最后：同图像PDG参数设置中的相同选项一样，决定是否把cov002放最后当封底。</LI></UL>
+      <p>文本PDG其实就是PDF用ZIP压缩后，再加密成PDG，所以本软件转换文本PDG成PDF是完全无损的：先解密，然后UnZIP就得到PDF了。</p>
+	<p>
+	文本PDG用本软件转换成散页PDF后，用什么软件合并可是大有讲究。因为文本PDG为了保证每一个单独的文件都能被打开，有时候会把相同的字体文件在每一个散页PDF中都嵌入一遍，造成文件总长度大大增加。如果PDF合并软件（比如Acrobat）具有消除冗余对象的能力，即在合并散页PDF时，能够自动消除重复的内嵌字体，则最终合并出来的PDF文件长度可能远小于散页PDF文件的总长度，节约存储空间。其他没有这种能力的野狐禅合并软件，合并后的PDF文件长度可能和原始散页文件的总长度差不多。</p>
+	<p>
+	Acrobat合并后的PDF文件没有分段页码、没有书签，这个时候可以用FreePic2Pdf的“更改PDF”功能挂书签顺便设置分段页码，因为Pdg2Pic在处理文本PDG的时候，顺便生成了接口文件，所以挂起来很方便。如果没有接口文件，可以用<a href="#PDF分段页码">“PDF分段页码”</a>功能单独设置分段页码，用PdgCntEditor单独挂书签。</p>
+      <P><B><FONT color=#ff0000><A name=JPG文件修复>JPG文件修复</A></FONT></B></P>
+      <P>在清晰版PDG文件中，封面、插图页经常用JPG文件存储，但是超星浏览器对JPG文件的容错能力很差，如果因为网络或其它原因造成JPG数据不完整或数据有错，在打开时很容易导致超星浏览器中断退出。这种PDG文件在用Pdg2Pic转换时，通常会报告“文件损坏”或“JPG数据错误，请修复”；如果用PdgThumbViewer检查，通常会报告为Broken 
+      File、Decode Failed或黑线页。</P>
+      <P>对于这种文件，首先应该重新下载，或换一个镜像下载。如果实在找不到镜像， 
+      或几次下载后都是同样的错误，则可以尝试用“JPG文件修复”功能试试运气：点击工具条上的“JPG文件修复”按钮，进入“JPG文件修复”界面，按界面上标注的1、2、3步骤操作即可。</P>
+      <P>对“JPG文件修复”界面选项的说明：</P>
+      <UL>
+        <LI>文件处理：如果选择“只解码”，则只从PDG文件中获取原始JPG数据流，这个数据流可能有错；如果选择“解码并修复”，则在提取出原始JPG数据流后，先尝试将数据流解码成位图，再将位图压缩成正确的JPG数据流。 
+
+        <LI>结果文件：如果选择“另存为同名JPG”，则将“文件处理”步骤生成的JPG数据流存储为JPG文件；如果选择“覆盖原PDG”，则用JPG数据流覆盖原始PDG文件内容。 
+
+        </UL>
+      <P>修复的时候，通常先将“文件处理”选择为“只解码”，将“结果文件”选择为“另存为同名JPG”，然后点“开始”。这样可以获得最原始的JPG文件，然后用超星浏览器和FreePic2Pdf试一下，如果直接打开这样的JPG文件，或转成PDF后打开出错，再将“文件处理”选项改成“解码并修复”，尝试修复。确认无误后，再将“结果文件”选项改成“覆盖原PDG”，对原PDG进行覆盖。</P>
+      <P>如果“文件处理”选项为“解码并修复”时软件报告“修复失败，请用其他软件转存”，则可以用ACDSEE、ComicsViewer等软件打开生成的JPG文件，重新处理一下，然后再另存为同名JPG文件。</P>
+      <P>需要注意的是：</P>
+      <OL>
+        <LI>对于PdgThumbViewer报告为Broken 
+        File的文件，重新下载、换镜像下载才是正常的选择，“JPG文件修复”是不得已的选择。 
+        <LI>“JPG文件修复”功能只能修复原始文件是JPG的PDG文件，不能修复原始文件是CCITT G4或DjVu的文件。 
+        <LI>“JPG文件修复”功能在修复时，其实只是通过重新压缩，使生成的新文件在打开时不会再报错，但是原始PDG文件中丢失的图像信息，并不能通过修复找回来。 
+        </LI></OL>
+      <p><b><font color="#FF0000"><a name="PDF分段页码">PDF分段页码</a></font></b></p>
+	<p>有些PDF没有分段页码，看起来有点烦，不方便按照目录页中的页码直接跳转，<span lang="zh-cn">所以加了这么一个功能。点击主界面工具条上的“PDF分段页码”按钮，即可打开“设置PDF分段页码”界面。</span></p>
+	<p><span lang="zh-cn">这个功能使用比较简单，看界面上的文字基本就能操作：</span></p>
+	<ol>
+		<li><span lang="zh-cn">从资源管理器中把需要设置分段页码的PDF文件拖拽过来。</span></li>
+		<li><span lang="zh-cn">输入目录页码、正文页码。</span></li>
+		<li><span lang="zh-cn">点击“设置”按钮开始设置。</span></li>
+		<li><span lang="zh-cn">点击“退出”按钮退出。</span></li>
+	</ol>
+	<p><span lang="zh-cn">使用注意事项在界面中注明了，此处从略。</span></p>
+      <H2><FONT color=#ff0000><A name=鸣谢>附录A 鸣谢</A></FONT></H2>
+      <P>本软件的图像文件处理采用了Davide Pizzolato的<A href="http://www.xdp.it/" 
+      target=_blank>CxImage</A>，底层JPEG采用了<A href="http://www.ijg.org/" 
+      target=_blank>Independent JPEG Group</A>（独立JPEG小组）发布的<A 
+      href="ftp://ftp.simtel.net/pub/simtelnet/msdos/graphics/" 
+      target=_blank>JPEG LIB</A>，PNG采用了<A href="http://www.libpng.org" 
+      target=_blank>libpng</A>组织提供的源代码，TIFF采用了<A href="http://www.libtiff.org/" 
+      target=_blank>libtiff</A>组织提供的源代码，<A href="http://www.zlib.net/" 
+      target=_blank>zlib</A>采用ASM实现。Jpeg 2000编解码采用<A 
+      href="http://www.kakadusoftware.com/" 
+      target=_blank>kakadusoftware</A>提供的kakadu。DjVu解码采用<A 
+      href="http://sourceforge.net/projects/djvu/" 
+      target=_blank>djvulibre</A>，不过被我改到VC不再报告内存漏洞。</P>
+      <P>另外本软件在开发过程中还得到<A href="http://www.readfree.net" 
+      target=_blank>网上读书园地</A>成员车明（BECompanion）、hstong、 伊兹鱼、coolman和qdlsy，及<A 
+      href="http://bbs.rbook.net/" target=_blank>rbook</A>论坛mogaoku的大力支持与协助。</P>
+      <P>在此对以上组织和个人表示深切的谢意！</P>
+      <H2><A name=版本更新记录><FONT color=#ff0000>附录B 版本更新记录</FONT></A></H2>
+      <P>Version 5.11<br>错误修正：如果彩色JPG文件没有标准文件头，制作出来的PDF可能红蓝颠倒。</P>
+	<P>Version 5.10<br>
+	  功能修正：与最新版MODI_Engine_From_Office2007SP3相配合，不再需要以管理员权限运行才能OCR。</P>
+	<P>Version 5.09<br>新增功能：支持名为PDG，实为webp的文件。<br>功能增强：兼容某些数据格式有误的bookcontents.dat文件。有些软件真的是狗屁不通。<br>
+	  功能修正：JPG解码时，CMYK色彩空间转RGB空间改用精确但慢速的公式，以求与Adobe的结果一致。<br>错误修正：在非简体中文Windows环境下，部分界面文字显示乱码。</P>
+	<P>Version 5.08<br>错误修正：在解码带APP14标记的24位色JPG图像时，可能会出现偏色。</P>
+	<P>Version 5.07<br>
+		<span lang="zh-cn">
+		新增功能：设置PDF分段页码，用于解决文本PDG合并后没有分段页码的问题。其实通过给PDF挂书签的方式也能解决，不过要对接口文件进行编辑，稍微麻烦一点。<br>
+		错误修正：对于名为PDG，实为BMP的文件，在统计文件信息时不能正确报告是BMP文件。</span></P>
+	<P>Version 5.06<br>
+		错误修正：解码某些调色板图像时，会出错退出。</P>
+	<P>Version 5.05<br>
+		功能修正：在解码某些TIFF时如果发现错误，不再是直接退出解码过程，而是继续尝试能否解码剩余部分。<br>
+		错误修正：在Windows XP下调用MODI_Engine失败，不能正常OCR。</P>
+	<P>Version 5.04<br>
+		功能增强：取消每个文本PDG文件最多只能有63页的限制，放宽至255页。</P>
+	<P>Version 5.03<br>
+		功能修正：与V2版MODI_Engine配合，OCR出错时不会再造成主界面闪烁。<br>
+		功能修正：与V2版MODI_Engine配合，更改OCR中断方式。</P>
+	<P>Version 5.02<br>
+		错误修正：某些不规范的TIFF文件（TIFFTAG_STRIPBYTECOUNTS字段值超出合理范围）转PDF后显示不正确。</P>
+	<P>Version 5.01<br>
+		功能增强：对于透明色为黑色的调色板图像，加强对透明色的自动识别，避免出现颜色丢失。</P>
+	<P>Version 5.00<br>
+		新增功能：在OCR时，可以选择先去除图表区域，减小OCR引擎出错退出的概率。<br>
+		功能修正：改为通过MODI_Engine.exe调用MODI，彻底杜绝因为MODI出错导致意外退出。<br>
+		错误修正：如果调色板图像的透明色是黑色，则解码后会忽略对透明色进行转换。</P>
+	<P>Version 4.15<br>
+		错误修正：某些JPEG压缩的TIFF文件转PDF后，只能解码出一部分内容。<br>
+		错误修正：如果ICC数据错误（指针越界），可能会造成带ICC色彩校正的图像解码出问题。</P>
+	<P>Version 4.14<br>
+		功能增强：优化JPEG、JPEG 2000转PDF，减小PDF中的对象数量和文件长度。<br>
+		功能增强：增强对破损PDG的容错能力。</P>
+	<P>Version 4.13<br>
+		错误修正：转PDF时如果碰到有问题的TIFF文件导致文件打开失败，则软件会出错退出。</P>
+	<P>Version 4.12<br>
+		新增功能：在任务栏上显示当前进度。<br>
+		功能增强：增强OCR失败后的恢复能力，避免一页失败后面一连串页面失败。<br>
+		功能修正：OCR的二值化算法从Otsu改回八叉树，并增加自动对比度处理。</P>
+	<P>Version 4.11<br>
+		错误修正：转换背景透明的调色板图像成PDF时，生成的PDF打开时会报错。</P>
+	<P>Version 4.10<br>
+		错误修正：某些PNG图像解码不正确。</P>
+	<P>Version 4.09<br>
+		功能增强：在“JPG文件修复”界面中，不再需要指定JPG质量系数，改为从源文件中读取。<br>
+		功能增强：JPG转PDF时，能从带ICC配置的JPG中抽取ICC嵌入PDF。<br>
+		错误修正：某些JPG转PDF后在Acorbat中打开显示为方格图像。<br>
+		错误修正：PDG书签中如果正文之前出现间歇性缺项，自动补充的空缺项目会被放到最后。</P>
+	<P>Version 4.08<br>
+		错误修正：在Win 10下以管理员权限运行后，从资源管理器不能拖拽打开文件。而不以管理员权限运行，则在Win 10下OCR内容为空。</P>
+	<P>Version 4.07<br>
+		功能增强：OCR前的二值化算法从八叉树改成Otus。</P>
+	<P>Version 4.06<br>
+		错误修正：生成的某些双层PDF在Acrobat中不能搜索字符串。</P>
+	<P>Version 4.05<br>
+	新增功能：增加“PDF文件初始视图”选项。<br>
+	新增功能：增加“cov002放最后”选项，可以把cov002当封底。<br>
+	功能增强：增强TIFF文件的容错性。<br>
+	功能增强：增强对BookContents.dat的容错性。</P>
+	<P>Version 4.04<br>
+		继续与CMYK色彩空间的JPG做斗争。</P>
+	<P>Version 4.03<br>
+		新增功能：“PDF校对工具”新增“包括子文件夹”选项。<br>
+		新增功能：在“PDF校对工具”的“显示文字”功能中，允许更改文字颜色，透明度改为11级。<br>
+		功能增强：为避免歧义，在显示PDG文件信息时，对DPI同时标注按照CX算法计算（宽度小于1200算150 dpi，否则300 
+		dpi）、按32开计算（物理宽度13cm）、按16开计算（物理宽度18.4cm）这三种值。<br>
+		功能增强：在生成双层PDF时，对行高进行统一，避免安卓上的ezPDF Reader读断行。<br>
+		功能增强：在生成双层PDF时，如果选择了“合并文本行”，会自动检查词间距，如果发现词间距较大，则不能算同一个字符串，避免文字拉太扁。<br>
+		功能增强：如果PDG正文页之后还有附属页，而书签中没有这些附属页项，则自动生成指向这些附属页的书签项。<br>
+		功能增强：支持Alpha通道透明PNG。<br>
+		功能增强：继续增强MODI的强壮性，为清华文通擦屁股。<br>
+		错误修正：某些CMYK色彩空间的JPG文件解码异常。<br>
+		错误修正：某些3层DjVu转PDF后文字变灰。<br>
+		错误修正：如果缺页，转出来的PDF书签会缺项。</P>
+	<P>Version 4.02<br>
+		功能增强：即使MODI（其实是清华文通）出错，也尽量不造成整个软件退出。<br>
+		功能增强：对于T3类型PDG，直接用底层单色图像做OCR，减少MODI出错的可能。</P>
+	<P>Version 4.01<br>
+		错误修正：大图版PDG显示发虚。</P>
+	<P>Version 4.00<br>
+		新增功能：在转换成PDF的同时进行OCR，生成带有可检索、复制文字的双层PDF，并提供对自身所生成的双层PDF进行校对所需的辅助功能。<br>
+		功能增强：支持名为BMP，实为PDG的文件。<br>
+		功能增强：生成的PDF文件长度比以前更小。<br>
+		功能增强：支持utf-8编码的catalog.dat。<br>
+		功能修正：按FreePic2Pdf对接口文件的变更要求，调整生成的接口文件内容。<br>
+		错误修正：转PDF时，选择了“转换结束后删除原始PDG文件”，有些文件删不掉。</P>
+	<P>Version 3.06<br>
+		错误修正：某些灰度04H的PDG会导致程序出错退出。</P>
+	<P>Version 3.05<br>
+		<span lang="zh-cn">
+		错误修正：直接生成PDF时，如果未选择“展开书签”选项，则生成的PDF文件中的多级书签项不符合PDF规范要求，在某些浏览器下阅读可能有问题。</span></P>
+	<P>Version 3.04<br>
+		<span lang="zh-cn">错误修正：如果bookcontents.dat文件破损，可能导致出错退出。</span></P>
+	<P>Version 3.03<br>
+		处理某些特定宽度的单色图像可能造成出错退出。</P>
+	<P>Version 3.02<br>
+		继续消除单色图像右侧可能出现的黑色竖线。</P>
+	<P>Version 3.01<br>
+		错误修正：某些单色图像右侧边界会出现竖线。</P>
+	<P>Version 3.00<br>
+		<span lang="zh-cn">新增功能：“参数设置”中增加“JP2压缩比”选项，用于控制生成的JPEG 2000文件大小与质量。<br>
+		功能增强：JPEG 2000编码器不再采用Jasper，改用kakadu。<br>
+		错误修正：PDG直接转PDF时，如果单级目录项太多，可能会出错退出。</span><br>
+		错误修正：某些JPEG 2000调色板图像解码不准确。<br>
+		去掉了形同“鸡肋”的OCR功能。<br>
+		改为发行Unicode版，不再发行ANSI版。<br>
+		取消英文版。我不太相信玩PDG的人会看不懂中文，Unicode版在非中文环境下也能运行。</P>
+	<P>Version 2.13<br>
+		功能增强：黑白图像转PDF时，能够识别颜色“不纯”的黑白图像。<br>
+		功能增强：改进二值化算法，增加OCR识别率。<br>
+		错误修正：在某些使用特殊分隔符的语言环境（如用逗号当作小数点的意大利语环境）下，制作出来的PDF文件打开失败。<br>
+		错误修正：某些JPG中的EXIF旋转标识识别错误。<br>
+		错误修正：不能正确解码采用PHOTOMETRIC_PALETTE的单色TIFF图像。<br>
+		错误修正：转换文本PDG成PDF时，会出错退出。</P>
+      <P>Version 2.12<BR>错误修正：IJL不能正确解码某些含JFXX段的JPG文件。</P>
+      <P>Version 2.11<BR>zlib、IJG代码恢复原始版本，与IPP版说再见，以避免层出不穷的兼容性问题。</P>
+      <P>Version 2.10<BR>功能增强：对含无效字符的文件路径能够给出提示。<BR>错误修正：某些JPG图像转换不正常。</P>
+      <P>Version 2.09<BR>错误修正：转换PNG到PDF不成功。 </P>
+      <P>Version 2.08<BR>功能增强：JPEG 
+      2000解码改用Kakadu，以加快速度。<BR>功能增强：JPEG编解码改用经过修正的IJL 
+      2.0，以加快速度。<BR>功能增强：zlib、IJG代码改用IPP优化版，以加快速度。 
+      <P>Version 2.07<BR>功能修正：生成的接口文件中缩小页边界、字体尺寸，以适应高DPI后的变化。 
+      <P>Version 
+      2.06<BR>新增功能：在“处理文本PDG”中，增加“图像PDG也一起转”选项，便于处理图像附属页。详见使用说明。<BR>功能增强：转换文本PDG时，不再需要InfoRule.dat，自动按文件名排序。<BR>功能增强：直接转PDF时，按照PDG规则设置DPI，最大宽度小于1200像素时为100 
+      DPI，否则300。<BR>功能增强：“无书签文件时用页码生成书签”选项对文本PDG同样有效。 
+      <P>Version 2.05<BR>错误修正：某些Old-style JPEG压缩的TIFF文件显示有错。 
+      <P>Version 2.04<BR>错误修正：生成的PDF文件“文档属性”中的创建日期、修改日期未按时区校正。 
+      <P>Version 
+      2.03<BR>功能增强：自动校正简体正文OCR结果中的常见错误。<BR>功能调整：OCR选项中的“自动拉伸”缺省改为选中，以对付倾斜页面。 
+      <P>Version 
+      2.02<BR>新增功能：支持名为PDG，实为GIF的文件，方便从售书网站上补封面。<BR>新增功能：增加“无bookcontents.dat时用页码生成书签”选项。此选项以前在系统内部默认选择，现在开放出来，可以通过选项界面进行更改。<BR>功能增强：支持早期PM44封装的photo 
+      DjVu。<BR>错误修正：PDG转PDF时，如果碰到空白DjVu页面，转换后的PDF自空白页面起显示不正常。<BR>错误修正：名为PDG，实为空白DjVu的文件显示不正确。<BR>错误修正：打开某些JPEG 
+      2000图像时出错退出。 
+      <P>Version 2.01<BR>错误修正：在选择目标PDF时，如果手工在文件选择对话框中输入文件名，则最终文件名有误。 
+      <P>Version 
+      2.00<BR>新增功能：图像版PDG直接转PDF，采用DjVu压缩的黑白页面能够无损转换。<BR>新增功能：支持名为PDG，实为jpeg 
+      2000的文件，包括jpeg 
+      2000插图。<BR>功能增强：JasPer源代码升级至v1.900.1。<BR>错误修正：某些CMYK色彩空间的JPG文件打开后色彩显示不正常。<BR>错误修正：OCR时如果一页有错，会导致后面所有页面不能正常OCR。<BR>去掉对Pdg2.dll的依赖，能够独立运行。<BR>同步发行英文版。 
+
+      <P>Version 1.34<BR>错误修正：不能打开某些单色TIFF文件。<BR>错误修正：不能打开某些采用JPEG压缩的TIFF文件。 
+      <P>Version 1.33<BR>功能修正：列表中不再显示文本PDG（文件名中含下划线）。<BR>错误修正：打开某些黑白PDG时可能出错退出。 
+      <P>Version 1.32<BR>错误修正：某些CMYK色彩空间的JPG文件显示不正确。 
+      <P>Version 1.31<BR>错误修正：某些CMYK色彩空间的JPG文件显示不正确。 
+      <P>Version 1.30<BR>错误修正：由于某个不幸的错误，导致从Version 1.28起不能正常转换文本PDG的目录。 
+      <P>Version 1.29<BR>功能增强：支持ACH格式的PDG，支持04H的黑白PDG。 
+      <P>Version 
+      1.28<BR>功能增强：处理文本PDG时，可以点“停止”。<BR>功能增强：处理文本PDG的目录时，XML解析器换成微软的解析器，以支持转义字符。<BR>功能增强：对于没有bookcontents.dat的图像版PDG，能够按照正文页码生成目录。 
+
+      <P>Version 1.27<BR>功能增强：<A href="http://www.libpng.org" 
+      target=_blank>libpng</A>源代码升级至v1.2.28。<BR>错误修正：碰到某些破损PNG会出错。<BR>错误修正：对于带插图的T3类PDG，如果页面尺寸比较大，在预览时可能不能正常显示插图。 
+
+      <P>Version 
+      1.26<BR>新增功能：支持按照JPEG格式中的EXIF信息，自动对图像进行旋转。某些数码相机喜欢这个。<BR>功能增强：放宽格式检查，兼容某些第三方工具生成的不规范PDG。 
+
+      <P>Version 1.25<BR>新增功能：支持名为PDG，实为DjVu的文件。<BR>新增功能：支持名为PDG，实为单页TIFF的文件。 
+      <P>Version 1.24<BR>新增功能：支持日文OCR。当然需要先安装日文MODI。 
+      <P>Version 1.23<BR>新增功能：支持名为PDG，实为PNG的文件。 
+      <P>Version 
+      1.22<BR>功能增强：在从bookinfo.dat生成FreePic2Pdf.itf时，[Info]段的Subject值可以从“参考文件格式”取，也可以从“参考文献格式”取。PDGExport生成的bookinfo.dat用“参考文件格式”，其他软件按照lr习惯一般用“参考文献格式”。<BR>FAQ部分增加对FreePic2Pdf接口文件生成的说明。 
+
+      <P>Version 1.21<BR>错误修正：如果转换的文件全部是JPG，则生成的接口文件中没有MinWidth项。 
+      <P>Version 1.20<BR>功能增强：兼容某些非标准格式的BookContents.dat。 
+      <P>Version 
+      1.19<BR>新增功能：“参数设置”中的“展开书签”选项，控制生成的接口文件中Bkmk段ShowAll的值。<BR>功能增强：优化对DjVu的支持。 
+
+      <P>Version 1.18<BR>功能增强：改进对黑线页的识别。 
+      <P>Version 
+      1.17<BR>新增功能：在状态条上报告PDG文件原始数据格式，包括CCITT_v1（V1版黑白PDG）、CCITT、JPG和DjVu，多层（T3）PDG文件报告底层和第一个插图的格式，中间用“＋”连接。<BR>功能增强：能够报告插图下载不完全，或插图数据错误的T3文件。<BR>功能修正：在状态条上报告文件DPI时，如果选择了“直接解码”，而原始数据流是DjVu，则DPI值直接从DjVu数据流中取，而不是按照象素宽度进行计算。<BR>错误修正：对某些不能正常解码的05H 
+      PDG，不能报告异常。 
+      <P>Version 1.16<BR>错误修正：解码某些特殊软件下载的05H时，会因为偏移量66H处的1出问题。 
+      <P>Version 1.15<BR>错误修正：在解码某些画面尺寸非常大的多层PDG时，会因为内存问题导致背景一片黑暗。 
+      <P>Version 
+      1.14<BR>功能修正：在判断黑线页时，将“自动忽略顶部和底部的100条扫描线”改成“自动忽略顶部和底部的10%扫描线”。<BR>错误修正：不能正确显示V1版PDG文件。 
+
+      <P>Version 1.13<BR>继续放宽格式检查条件，避免误报警。 
+      <P>Version 1.12<BR>新增功能：允许直接更改目标文件夹、目标文件。<BR>功能增强：改变判断黑线页、数据完整性的条件，减少误报警。 
+      <P>Version 
+      1.11<BR>新增功能：增加“添加书签到PDF文件尾”选项，可以控制生成的FreePic2Pdf接口文件的[Bkmk]段AddAsText项。<BR>错误修正：某些非正常PDG文件会造成程序中断退出。 
+
+      <P>Version 1.10<BR>错误修正：碰到1AH格式时，解密不正确。 
+      <P>Version 1.09 
+      <OL>
+        <LI>新增功能：JPG文件修复，用于修复数据损坏的JPG版PDG文件。超星浏览器对JPG文件的容错能力很差，在打开PDG文件时，如果PDG原始格式是JPG，而数据又有错，很容易造成超星浏览器中断退出。此功能就是用来将出错的文件尽量修复成无错的JPG。 
+
+        <LI>功能增强：能够识别并报告转换过程中碰到的解码出现黑色条纹的PDG文件。 
+        <LI>功能增强：能够识别将PDF文件直接更名为PDG文件的情况。 
+        <LI>功能增强：在处理文本PDG文件时，能够报告数据有错的文件。 
+        <LI>错误修正：如果选择了“预览”选项并且文件数很多，在点击“当前页移到顶部”或“当前页移到尾部”后，会长时间没有反应。 </LI></OL>
+      <P>Version 1.08<BR>错误修正：打开某些数据有问题的文件后，导致程序出错退出，或死锁。 
+      <P>Version 1.07 
+      <OL>
+        <LI>新增功能：OCR，能够将PDG文件OCR成单独的文本文件，也可以将整本书OCR成一个文本文件。OCR引擎为微软Office 
+        2003的Microsoft Office Document Imaging (MODI)。OCR时自动跳过封面、书名、版权、目录页。 
+        <LI>功能增强：可以直接解码加密V1格式的PDG文件。 
+        <LI>功能增强：如果超星目录是从正文开始编排的，则在生成FreePic2Pdf所需的书签文件时，自动插入封面、目录等前导页的书签项。 
+        <LI>功能增强：1xH解码改用伊兹鱼提供的代码，效果有所改进。 
+        <LI>错误修正：解码某些PDG文件时会解成黑色条文。 
+        <LI>错误修正：对某些早期ServerID加密判断错误，导致某些文件不能正常解码。 </LI></OL>
+      <P>Version 
+      1.06<BR>错误修正：如果PDG文件夹中没有BookInfo.dat，则在生成的FreePic2Pdf.itf中就不会包含Font段，导致在FreePic2Pdf 
+      v1.03中不能生成缺省书签。 
+      <P>Version 1.05 
+      <OL>
+        <LI>新增功能：与FreePic2Pdf配合，能够按照bookcontents.dat自动生成PDF书签。如果指定的源文件夹下没有bookcontents.dat文件，则生成一个朴素的缺省书签。 
+
+        <LI>新增功能：与FreePic2Pdf配合，能够将BookInfo.dat作为文本添加到PDF文件中 
+        ，并用其中内容填写PDF的Document Properties，包括Title、Author、Subject、Keyword。 
+        <LI>新增功能：与FreePic2Pdf配合，能够在PDF文件中自动生成三段页码：封面、版权页用大写英文字母，目录页用小写罗马字母，正文页用阿拉伯数字。 
+
+        <LI>新增功能：将文本格式（其实是PDF格式）的PDG文件转换成PDF，并按照InfoRule.dat中指定的顺序重新编号，便于用Acrobat合并成一个PDF文件；将catalog.dat转换成符合FreePic2Pdf接口规范的书签文件，便于用FreePic2Pdf将书签添加到合并后的PDF文件。 
+
+        <LI>新增功能：增加快捷键1、2、3、4，与界面上的1、2、3、4项功能对应。 
+        <LI>功能增强：改变了计算FreePic2Pdf接口文件中最小页宽的算法，避免被小尺寸的页面拖累。 
+        <LI>功能调整：为避免不必要的错误，彻底放弃对6xH格式的支持，所有6xH将显示为无法识别的文件类型。 
+        <LI>功能增强：加强对T3数据合法性的检查，避免被错误的文件拖累。 
+        <LI>错误修正：在碰到非00H、04H的加密JPG文件时，转换出来的JPG可能有损。 
+        <LI>错误修正：在转换00H的DjVu时会出错。 
+        <LI>错误修正：在Windows 98下退出时会报错。 </LI></OL>
+      <P>Version 1.04<BR>错误修正：打开6xH文件会中断退出。<BR>错误修正：界面最大化后，部分控件显示不正确。 
+      <P>Version 1.03<BR>功能增强：能够处理插图为加密DjVu格式的T3文件。 
+      <P>Version 1.02<BR>错误修正：在转换某些T3文件时，因为偏移量计算错误造成非正常退出。 
+      <P>Version 1.01 
+      <OL>
+        <LI>新增功能：支持某些特殊格式的PDG文件。为此要感谢<A href="http://www.readfree.net" 
+        target=_blank>网上读书园地</A>成员车明（BECompanion）、hstong、coolman和qdlsy的大力支持与协助。 
+        <LI>新增功能：支持T3多层（DjVu）格式的PDG文件。以前版本对于这种文件只能获得底层黑白图像。 
+        通过接口文件与FreePic2Pdf配合，可以将多层PDG无损转换成多层PDF。 
+        <LI>新增功能：“生成FreePic2Pdf接口文件”选项。如果此选项被选中（缺省为选中），则每次转换完成后会在目标文件夹生成FreePic2Pdf.itf文件，记录用FreePic2Pdf合并成PDF文件所需的辅助信息，及多层图像的各层信息；否则不生成。 
+
+        <LI>新增功能：“自动统计”选项。如果此选项被选中（缺省为选中），则每次改变文件或文件夹，均统计并报告列表中的文件格式；否则不统计。 
+        <LI>新增功能：支持从资源管理器直接拖拽文件夹或文件到界面上。如果拖过来的是文件夹，则将该文件夹下所有PDG文件加入列表；如果拖过来的是文件，则将这些文件加入列表。 
+
+        <LI>新增功能：支持转换成BMP格式。 
+        <LI>新增功能：对于黑白图像，允许选择转换成TIFF，或PNG、BMP。以前只能转换成TIFF。 
+        <LI>新增功能：在将JPG格式的PDG文件复制成JPG文件时，在JPG文件中填写扫描DPI。 
+        <LI>功能增强：改进了转换算法，减少中间环节，以加快转换速度，减少内存消耗。 
+        <LI>功能增强：增加对没有下载完成的PDG文件的检查，避免因为这些文件而造成Pdg2控件出现死循环。其实这种检查本应该在控件内部做的。 
+        <LI>功能修正：彩色/灰度图像缺省转换成JPG，以加强兼容性。原先的缺省值为JPEG TIFF，某些图像浏览器不支持。 </LI></OL>
+      <P>Version 
+1.00<BR>实现PDG转TIFF、JPG、PNG、JP2。</P></TD></TR></TBODY></TABLE></CENTER></DIV></BODY></HTML>
