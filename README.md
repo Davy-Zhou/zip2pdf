@@ -1,6 +1,6 @@
-[toc]
-
 ![使用介绍](https://i.imgtg.com/2022/12/05/DkdHr.gif)
+
+下载链接：https://github.com/Davy-Zhou/zip2pdf/releases/download/v0.1/zip2pdf.v0.1.zip
 
 # 一、更新&&bug修复
 
