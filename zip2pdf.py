@@ -5,14 +5,12 @@ import zipfile
 from pywinauto.application import Application
 from colorama import init 
 from traceback import print_exc
-from pywinauto.timings import Timings
 import subprocess
-
-# from pywinauto.keyboard import send_keys
+from pywinauto.keyboard import send_keys
 
 # ok TODO 加密压缩包解密
-# rar解密支持
-# 多个压缩包批量解密
+# TODO rar解密支持
+# TODO 多个压缩包批量解密
 
 
 def zip2pdg(filename):
@@ -69,7 +67,7 @@ def zip2pdg(filename):
             if not true_pwd:
                 zf.extract(member,path)
         if true_pwd:
-            # TODO 7z.exe
+            # ok TODO 7z.exe
             zip_path=py_dirname+"\\7-Zip\\7z.exe"
             completed = subprocess.run([zip_path,'x',filename,'-o'+path,'-p'+true_pwd,'-y'])
             if completed.returncode==0:
@@ -80,49 +78,87 @@ def zip2pdg(filename):
         return (path+"\\"+zinfo[0].filename.split('/')[0] if path==os.path.dirname(filename) else filename.strip(".zip"))
 
 
-# TODO PDG转PDF
+# ok TODO PDG转PDF
 
 def pdg2pdf(dirname):
-    # TODO file_name解析
+    # ok TODO file_name解析
     py_dirname= os.path.dirname(os.path.abspath(sys.argv[0]))
     path = py_dirname+ "\\Pdg2Pic\\Pdg2Pic.exe"
     app = Application(backend='uia').start(path)
+    # app = Application(backend='win32').start(path)
     # 连接软件的主窗口
     dlg_spec = app.window(title_re='Pdg2Pic*', class_name_re='#32770*')
     # 设置焦点，使其处于活动状态
     dlg_spec.set_focus()
-
-    # 选择pdg目录，send_keys('1')
-    dlg_spec['Button2'].click()
+    # dlg_spec.print_control_identifiers()
+    # dlg_spec['Static2'].set_window_text(dirname)
+    # sleep(60)
+    # 选择pdg目录，
+    # sleep(1.0)
+    send_keys('1', 0.05, False, False,  False, True,False)
+    # sleep(1.5)
+    # dlg_spec['Button2'].click()
 
     # 选择桌面，以便确定
     dlg_spec['TreeItem'].click_input()
 
     # 设置pdg目录
     dlg_spec['文件夹(F):Edit'].set_edit_text(dirname)
-    dlg_spec['确定Button'].click()
+    # sleep(0.5)
+    send_keys('{ENTER}')
+    # dlg_spec['确定Button'].click()
     # sleep(2)
     # dlg_spec.print_control_identifiers()
     # sleep(60)
-    # Timings.fast()
+    # Timings.slow()
 
-    # ok_dialog = dlg_spec.child_window(title='格式统计')
+    # ok_dialog = app.window(title='格式统计')
     # ok_dialog.wait("ready",5,0.5)
     # ok_dialog.print_control_identifiers()
-    # sleep(60)
-    dlg_spec['OKButton'].click_input()
-    # TODO 转换性能问题
-    dlg_spec['4、开始转换Button'].click()
+    # ok_dialog['OKButton'].click_input()
+    prepared_time=len(os.listdir(dirname))/250
+    sleep(1+prepared_time)
+#    sleep(60)
+    # dlg_spec.set_focus()
+    send_keys('{ENTER}')
+    # dlg_spec['OKButton'].wait("ready",60,1)
+    # dlg_spec['OKButton'].click_input()
+    # ok TODO 转换性能问题,sleep时间还是要根据页数动态调整下才行
+    # dlg_spec['4、开始转换Button'].click()
+    sleep(0.5)
+    send_keys('{ENTER}')
+    # send_keys('4', 0.05, False, False,  False, True,False)
     # ok TODO 转换需要时间，怎么判断？
-
+    # send_keys('%{ESC}')
     # complete_dialog = dlg_spec.child_window(title='Pdg2Pic')
+    # complete_dialog.wait("exists",80,1)
+    # ok TODO 明天做，有个新思路，改为监控输出，PDF大小不再变化即为完成 https://stackoverflow.com/a/37256114/10628285
+    sleep(2)
+    pdf_name = dirname+".pdf"
+    if os.path.exists(pdf_name):
+        while True:
+            try:
+                os.rename(pdf_name, pdf_name)
+                sleep(1)
+                send_keys('%{F4}' '%{F4}')
+                break
+            except OSError as e:
+                sleep(1)
 
-    while dlg_spec['Static23'].window_text()[:5]=='存盘...':
-        break
+    # dlg_spec.wait("visible",30,1)
+    # sleep(1.5)
+    # send_keys('%{F4}' '%{F4}')
+    # send_keys('{ENTER}')
 
+    # while dlg_spec['Static23'].window_text()[:5]=='存盘...':
+        # sleep(1.5)
+        # send_keys('{ENTER}')
+        # dlg_spec.close()
+        # break
+    
     # 转换完毕
-    # dlg_spec['OKButton'].wait("ready",5,0.5)
-    dlg_spec['OKButton'].click_input()
+#    dlg_spec['OKButton'].wait("ready",10,1)
+    # dlg_spec['OKButton'].click_input()
 
     return dlg_spec
     # 测试
@@ -134,7 +170,13 @@ def pdg2pdf(dirname):
 
 
 if __name__ == '__main__':
-    filename=sys.argv[1]
+    os.system("title " + "zip2pdf@DavyZhou v0.10 2022-12-5")
+    print("软件更新请访问："+"\033[0;32;40m https://github.com/Davy-Zhou/zip2pdf \033[0m"+"\n")
+    print("暂时只支持zip和已解压pdg目录，\033[0;32;40m直接拖入需要合并成PDF的zip压缩包或已解压pdg目录即可\033[0m\n")
+    if len(sys.argv) == 2:
+        filename=sys.argv[1]
+    elif len(sys.argv) == 1:
+        filename=input("请输入zip文件或pdg目录：").replace("\"","").rstrip(' ')
     i=0
     init()
     while True:
@@ -146,8 +188,8 @@ if __name__ == '__main__':
                 dirname=filename
             dlg_spec=pdg2pdf(dirname)
             # 关闭PDG2Pic
-            sleep(1)
-            dlg_spec['Close2'].click()
+            # sleep(1)
+            # dlg_spec['Close2'].click()
             print("\n\n"+filename+" \033[0;32;40m已转成PDF!\033[0m\n\n")
         except:
             print('\n')
