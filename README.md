@@ -1,13 +1,39 @@
-# zip2pdg-pdg2pdf
-基于Python自动化解压压缩包成PDG，PDG合成PDF
+[toc]
 
-仅支持zip压缩包，加密压缩包有密码本，运气好可解压
+![使用介绍](https://i.imgtg.com/2022/12/05/DkdHr.gif)
 
-对于压缩包
-用法：python zip2pdf.py D:\Test\Linux内核源代码情景分析·第1卷_10924124.zip
+# 一、更新&&bug修复
 
-对于已解压目录
+- [x] 2022年12月5日 **v0.1**
+  - 性能提升，基本代码能做的，都做了，剩下的就看电脑的配置了
+  - 暂时仅支持ZIP（加密压缩包看运气吧）和已解压PDG目录
 
-或者：python zip2pdf.py  D:\Test\Linux内核源代码情景分析·第1卷_10924124
 
-[![zePTZ8.png](https://s1.ax1x.com/2022/11/16/zePTZ8.png)](https://imgse.com/i/zePTZ8)
+
+# 二、使用介绍
+
+本程序支持PDG压缩包自动转PDF,直接拖入压缩包或已解压PDG目录即可
+
+**压缩包**
+
+![压缩包](https://i.imgtg.com/2022/12/05/DkYxG.png
+)
+
+**PDG目录**
+
+![PDG目录](https://i.imgtg.com/2022/12/05/DksXM.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
