@@ -5,13 +5,59 @@ import zipfile
 from pywinauto.application import Application
 from colorama import init 
 from traceback import print_exc
-import subprocess
+from subprocess import run as sbp_run
 from pywinauto.keyboard import send_keys
+from rarfile import RarFile
+# from unrar import rarfile
+
 
 # ok TODO 加密压缩包解密
-# TODO rar解密支持
+# ok TODO rar解密支持
 # TODO 多个压缩包批量解密
 
+def rar2pdg(filename):
+    # 检查是否为rar文件,交给调用者判断吧
+    with RarFile(filename) as rf:
+        pwds=true_pwd=None
+        path=os.path.dirname(filename)
+        py_dirname= os.path.dirname(os.path.abspath(sys.argv[0]))
+        unrar_path=py_dirname+"\\7-Zip\\UnRAR.exe"
+        rinfo=rf.infolist()
+        op_path=path if (rinfo[0].filename+rinfo[1].filename).find("/")!=-1 else filename.strip(".rar")
+        # TODO 爆破rar密码
+        if rf.needs_password():
+            pwd_path=py_dirname+"\\passwords\\passwords.txt"
+            with open(pwd_path,'r',encoding='utf8') as f:
+                pwds=f.readlines()
+            for pwd in pwds:
+                try:
+                    # 测试两次，同目录原因
+                    # extract_item1=rf.extract(rinfo[1],path,pwd.rstrip("\n"))
+                    # extract_item2=rf.extract(rinfo[2],path,pwd.rstrip("\n"))
+                    # rf.extract() BadRarFile: Failed the read enough data: req=53187 got=0 一直未解决！！！
+                    # 解压目录
+                    test_pwd=sbp_run([unrar_path,'x',filename,rinfo[1].filename.replace("/","\\"),rinfo[2].filename.replace("/","\\"),'-op'+op_path,'-p'+pwd.rstrip("\n"),'-y','-inul'])
+                    if test_pwd.returncode==0:
+                            true_pwd=pwd.rstrip("\n")
+                            print(filename+" \033[0;31;40m解压密码为：\033[0m\033[0;32;40m"+true_pwd+"\033[0m\n")
+                            break
+                except:
+                    pass
+            # 未找到密码
+            if not true_pwd:
+                print(filename+" \033[0;31;40m解密失败,未找到密码,需要手动解压！\033[0m\n")
+                rf.close()
+                sys.exit(0)
+        else: 
+            true_pwd="-" #无密码情况
+        
+        # rar解压,均采用UnRar.exe
+        completed = sbp_run([unrar_path,'x',filename,'-op'+op_path,'-p'+true_pwd,'-y','-inul'])
+        if completed.returncode==0:
+            print("\n"+filename+" \033[0;31;40m解压成功！\033[0m\n")
+            # ok TODO 返回path,还得测试
+            pdg_path=path+"\\"+rinfo[0].filename.split('/')[0] if (rinfo[0].filename+rinfo[1].filename).find("/")!=-1 else filename.strip(".rar")
+            return pdg_path
 
 def zip2pdg(filename):
     # 非zip压缩文件，退出
@@ -23,6 +69,8 @@ def zip2pdg(filename):
         # ok TODO 压缩包加密，退出 https://stackoverflow.com/a/12038744/10628285
         zinfo=zf.infolist()
         pwds=None
+        # 解释下，为什么flag_bits要测试两次？
+        # 因为压缩包里面可能包含目录，但目录是不会加密的，不多加一次判断，目录里面的文件加密就发现不了
         if (zinfo[1].flag_bits & 0x1) or (zinfo[2].flag_bits & 0x1):
             print(filename+" \033[0;31;40m是加密压缩包！\033[0m\n")
             # 常用密码 https://readfree.net/bbs/forum.php?mod=viewthread&tid=5898121&extra=page%3D1
@@ -69,7 +117,7 @@ def zip2pdg(filename):
         if true_pwd:
             # ok TODO 7z.exe
             zip_path=py_dirname+"\\7-Zip\\7z.exe"
-            completed = subprocess.run([zip_path,'x',filename,'-o'+path,'-p'+true_pwd,'-y'])
+            completed = sbp_run([zip_path,'x',filename,'-o'+path,'-p'+true_pwd,'-y'])
             if completed.returncode==0:
                 print("\n"+filename+" \033[0;31;40m解压成功！\033[0m\n")
 
@@ -170,19 +218,25 @@ def pdg2pdf(dirname):
 
 
 if __name__ == '__main__':
-    os.system("title " + "zip2pdf@DavyZhou v0.10 2022-12-5")
+    os.system("title " + "zip2pdf@DavyZhou v0.20 2022-12-8")
     print("软件更新请访问："+"\033[0;32;40m https://github.com/Davy-Zhou/zip2pdf \033[0m"+"\n")
-    print("暂时只支持zip和已解压pdg目录，\033[0;32;40m直接拖入需要合并成PDF的zip压缩包或已解压pdg目录即可\033[0m\n")
+    print("暂时只支持zip、rar和已解压pdg目录，\033[0;32;40m直接拖入需要合并成PDF的zip、rar压缩包或已解压pdg目录即可\033[0m\n")
     if len(sys.argv) == 2:
         filename=sys.argv[1]
     elif len(sys.argv) == 1:
-        filename=input("请输入zip文件或pdg目录：").replace("\"","").rstrip(' ')
+        filename=input("请输入zip、rar文件或pdg目录：").replace("\"","").rstrip(' ')
     i=0
     init()
     while True:
         try:
             if os.path.isfile(filename):
-                dirname=zip2pdg(filename)
+                # ok TODO 压缩包类型判断
+                print("\n正在测试解压密码， \033[0;31;40m请等待...\033[0m\n")
+                if filename.lower().endswith('.zip'):
+                    dirname=zip2pdg(filename)
+                elif filename.lower().endswith('.rar'):
+                    dirname=rar2pdg(filename)
+                # input()
                 print("\n\n"+filename+" \033[0;32;40m已解压成PDG!\033[0m")
             else:
                 dirname=filename
@@ -199,7 +253,7 @@ if __name__ == '__main__':
         print("\033[0;31;40m重开+"+str(i)+"\033[0m\n")
         dirname=filename=None
         # 重复Input,cmd会自动加空格，然后出现莫名Bug
-        filename=input("请输入zip文件或pdg目录：").replace("\"","").rstrip(' ')
+        filename=input("请输入zip、rar文件或pdg目录：").replace("\"","").rstrip(' ')
 
 
 
