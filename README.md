@@ -1,8 +1,13 @@
 ![zip2pdf v0.1 使用介绍.gif](https://s2.loli.net/2022/12/05/uvdGa68OUqklzjZ.gif)
 
-下载链接：https://github.com/Davy-Zhou/zip2pdf/releases/download/v0.1/zip2pdf.v0.1.zip
+下载链接：https://github.com/Davy-Zhou/zip2pdf/releases/download/v0.2/zip2pdf.v0.2.zip
 
 # 一、更新&&bug修复
+- [x] 2022年12月8日 **v0.2**
+
+  - 增加对RAR解压支持
+
+    ![image-20221208185913486.png](https://s2.loli.net/2022/12/08/DLkEsqIFXChgn31.png)
 
 - [x] 2022年12月5日 **v0.1**
   - 性能提升，基本代码能做的，都做了，剩下的就看电脑的配置了
