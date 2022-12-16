@@ -1,8 +1,21 @@
-![zip2pdf v0.1 使用介绍.gif](https://s2.loli.net/2022/12/05/uvdGa68OUqklzjZ.gif)
+[toc]
 
-下载链接：https://github.com/Davy-Zhou/zip2pdf/releases/download/v0.2/zip2pdf.v0.2.zip
+![使用介绍](https://i.imgtg.com/2022/12/05/DkdHr.gif)
+
+
 
 # 一、更新&&bug修复
+
+- [x] 2022年12月16日 **v0.3**
+
+  - 修复**1.5个bug**，第2个bug不确定修好了（能力有限，那个问题已经不是应用层面的问题了），**注意程序运行过程，不要使用键盘和鼠标**
+
+  - 增加**AES zip**解密支持
+
+  - 增加**cbz、uvz**解压支持
+
+    ![Snipaste_2022-12-16_16-07-32.png](https://s2.loli.net/2022/12/16/3U7HbtFkcM8JYT4.png)
+
 - [x] 2022年12月8日 **v0.2**
 
   - 增加对RAR解压支持
