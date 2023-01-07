@@ -2,7 +2,7 @@
 
 ![zip2pdf v0.3使用.gif](https://s2.loli.net/2022/12/17/9dSyIaQumt5JfVM.gif)
 
-**下载链接**： https://github.com/Davy-Zhou/zip2pdf/releases/download/v0.3/zip2pdf.v0.4.zip
+**下载链接**： https://github.com/Davy-Zhou/zip2pdf/releases/download/v0.4/zip2pdf.v0.4.zip
 # 一、更新&&bug修复
 
 - [x] 2023年1月7日 **v0.4**
