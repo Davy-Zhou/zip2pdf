@@ -1,9 +1,24 @@
 [toc]
 
-![zip2pdf v0.1 使用介绍.gif](https://s2.loli.net/2022/12/16/aumU7IOTJwx9XFf.gif)
+![zip2pdf v0.3使用.gif](https://s2.loli.net/2022/12/17/9dSyIaQumt5JfVM.gif)
 
-**下载链接**： https://github.com/Davy-Zhou/zip2pdf/releases/download/v0.3/zip2pdf.v0.3.zip
+**下载链接**： https://github.com/Davy-Zhou/zip2pdf/releases/download/v0.3/zip2pdf.v0.4.zip
 # 一、更新&&bug修复
+
+- [x] 2023年1月7日 **v0.4**
+
+  - 更改打包方式，**提升启动速度**
+
+  - 增加对**压缩包内文件为图片、pdf**处理
+
+  - 增加对Mac下**使用windows虚拟机优化**
+
+  - 增加对**文件名加密的rar压缩包**处理
+
+  - 增加**删除压缩包，解压目录选项**,(配置文件在Config/config.ini，每次重开都会重新读取)
+
+    ![配置文件](https://s2.loli.net/2023/01/07/tA4Ps1g5aoGm9el.png)
+
 
 - [x] 2022年12月16日 **v0.3**
 
